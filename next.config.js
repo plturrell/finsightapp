@@ -13,6 +13,8 @@ const nextConfig = {
       },
     ];
   },
+  // Add output configuration for containerized environments
+  output: 'standalone',
 }
 
 module.exports = nextConfig
