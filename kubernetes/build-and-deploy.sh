@@ -16,11 +16,15 @@ cd "$SCRIPT_DIR/.."
 MODE=${1:-"all"}  # Default to "all"
 
 if [[ "$MODE" == "build" || "$MODE" == "all" ]]; then
-    echo "Building Docker image: $FULL_IMAGE_NAME"
-    docker build -t "$FULL_IMAGE_NAME" .
+    echo "Building Docker development image"
+    docker build -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:dev" -f Dockerfile.dev .
+    
+    echo "Building Docker production image"
+    docker build -t "${DOCKER_REGISTRY}/${IMAGE_NAME}:prod" -f Dockerfile.prod .
 
-    echo "Pushing Docker image to registry"
-    docker push "$FULL_IMAGE_NAME"
+    echo "Pushing Docker images to registry"
+    docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:dev"
+    docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:prod"
 fi
 
 if [[ "$MODE" == "deploy" || "$MODE" == "all" ]]; then

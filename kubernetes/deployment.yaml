@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: finsight-app
-        image: ${DOCKER_REGISTRY}/finsight-app:latest
+        image: ${DOCKER_REGISTRY}/finsight-app:prod
         ports:
         - containerPort: 3000
         resources:
